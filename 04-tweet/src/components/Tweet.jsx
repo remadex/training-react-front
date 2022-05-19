@@ -1,5 +1,6 @@
 import Author from './Author';
 import Avatar from './Avatar';
+import { LikeIcon, MoreOptionsIcon, ReplyIcon, RetweetIcon } from './IconButtons';
 import Message from './Message';
 import Time from './Time';
 
@@ -10,6 +11,12 @@ const Tweet = () => (
       <Author />
       <Time />
       <Message />
+      <div className="flex pt-3 space-x-3">
+        <ReplyIcon />
+        <RetweetIcon />
+        <LikeIcon />
+        <MoreOptionsIcon />
+      </div>
     </div>
   </div>
 );
