@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import FormProduct from './FormProduct';
 import ProductList from './ProductList';
 
@@ -16,19 +17,29 @@ const Order = () => {
       return;
     }
 
-    if (productList.map((p) => p.toLowerCase()).indexOf(product.toLowerCase()) >= 0) {
+    if (
+      productList.map((p) => p.name.toLowerCase()).indexOf(product.toLowerCase()) >= 0
+    ) {
       setError('Le produit existe déjà dans la liste');
       return;
     }
 
-    const newProductList = [...productList, product];
+    const newProductList = [
+      ...productList,
+      {
+        id: uuidv4(),
+        name: product,
+      },
+    ];
     setProductList(newProductList);
     setProduct('');
   };
 
-  const deleteProduct = (index) => {
-    const newArrayOfProducts = [...productList];
-    newArrayOfProducts.splice(index, 1);
+  const deleteProduct = (id) => {
+    const newArrayOfProducts = productList.filter((p) => p.id !== id);
+
+    // const newArrayOfProducts = [...productList];
+    // newArrayOfProducts.splice(index, 1);
 
     setProductList(newArrayOfProducts);
   };
